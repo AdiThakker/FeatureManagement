@@ -15,23 +15,7 @@ var app = Host.CreateDefaultBuilder()
     .ConfigureServices(services =>
     {
         services.AddFeatureManagement();
-        services.AddSingleton(typeof(Outer));
-        services.AddSingleton(typeof(Inner));
-        services.AddSingleton(typeof(Helper));
     })
     .Build();
-
-
-var outer = (Outer)app.Services.GetService(typeof(Outer));
-var inner = (Inner)app.Services.GetService(typeof(Inner));
-var helper = (Helper)app.Services.GetService(typeof(Helper));
-
-outer.Log("Hello!");
-
-
-outer.Log(() =>
-{
-    helper.Log("I am in Helper");
-});
 
 app.Run();
