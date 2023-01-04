@@ -1,5 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using FeatureManagement.Console;
+using FeatureManagement.Console.FeatureManagement;
+using FeatureManagement.Console.FeatureManagement.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -15,6 +17,7 @@ var app = Host.CreateDefaultBuilder()
     .ConfigureServices(services =>
     {
         services.AddFeatureManagement();
+        services.AddTransient<IFeatureFlagManagement, FeatureFlagManagement>();
     })
     .Build();
 
