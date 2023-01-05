@@ -1,6 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using FeatureManagement.Console;
-using FeatureManagement.Console.Entity;
 using FeatureManagement.Console.FeatureManagement;
 using FeatureManagement.Console.FeatureManagement.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,12 +16,13 @@ var app = Host.CreateDefaultBuilder()
     })
     .ConfigureServices(services =>
     {
-        services.AddFeatureManagement();
+        services.AddFeatureConfiguration();
         services.AddTransient<IFeatureFlagManagement, FeatureFlagManagement>();
+
     })
     .Build();
 
 
-Person person = new("Adi", "Unkown");    
+Console.WriteLine(await new Person(app.Services.GetService<IFeatureFlagManagement>()).Display());
 
 app.Run();
