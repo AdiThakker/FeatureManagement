@@ -21,8 +21,8 @@ namespace FeatureManagement.Console
 
         public async Task<string> Display() => await featureManager.IsFeatureEnabledAsync(this) switch
         {
-            true => string.Concat(Name , " ", Address),
-            _ => Name,
+            true => string.Concat("Verbose Logging enabled: ", Name, " - ", Address),
+            _ => string.Concat("Verbose Logging disabled: ", Name)
         };
     }
 

@@ -8,7 +8,6 @@ namespace FeatureManagement.Console.FeatureManagement
 {
     public static class FeatureManagerExtensions
     {
-
         public static IServiceCollection AddFeatureConfiguration(this IServiceCollection collection)
         {
             collection.AddFeatureManagement().AddFeatureFilter<TimeWindowFilter>();
