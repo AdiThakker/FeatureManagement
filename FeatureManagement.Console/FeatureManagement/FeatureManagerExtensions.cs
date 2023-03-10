@@ -8,9 +8,13 @@ namespace FeatureManagement.Console.FeatureManagement
 {
     public static class FeatureManagerExtensions
     {
-        public static IServiceCollection AddFeatureConfiguration(this IServiceCollection collection)
+        public static IServiceCollection AddFeatureConfiguration(this IServiceCollection collection, Action<IFeatureManagementBuilder> addFeatureFilters = null)
         {
-            collection.AddFeatureManagement().AddFeatureFilter<TimeWindowFilter>();
+            var featureBuilder = collection.AddFeatureManagement().AddFeatureFilter<TimeWindowFilter>();
+
+            // add additional feature filters if any
+            addFeatureFilters?.Invoke(featureBuilder);
+
             return collection;
         }
     }

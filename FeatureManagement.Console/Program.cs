@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using FeatureManagement.Console;
 using FeatureManagement.Console.FeatureManagement;
+using FeatureManagement.Console.FeatureManagement.Filters;
 using FeatureManagement.Console.FeatureManagement.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,13 +17,20 @@ var app = Host.CreateDefaultBuilder()
     })
     .ConfigureServices(services =>
     {
-        services.AddFeatureConfiguration();
+        services.AddFeatureConfiguration(_ => _.AddFeatureFilter<CustomFilterVerboseLogging>());
         services.AddTransient<IFeatureFlagManagement, FeatureFlagManagement>();
 
     })
     .Build();
 
+// Time Window logging feature
+var person = new Person(app.Services.GetService<IFeatureFlagManagement>());
+Console.WriteLine(await person.Display());
 
-Console.WriteLine(await new Person(app.Services.GetService<IFeatureFlagManagement>()).Display());
+// Custom Filter logging feature
+Console.WriteLine(await person.CustomDisplay());
+
+person.Address = "Famous Street";
+Console.WriteLine(await person.CustomDisplay());
 
 app.Run();
