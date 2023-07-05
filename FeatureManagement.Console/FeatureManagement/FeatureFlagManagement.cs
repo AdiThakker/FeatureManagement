@@ -35,7 +35,7 @@ namespace FeatureManagement.Console.FeatureManagement
 
         public async Task<bool> IsFeatureEnabledAsync(string name) => await IsFeatureEnabledAsyncHelper<object>(name, FeatureFlagDefaultState.Unkown, null);
 
-        public async Task<bool> IsFeatureEnabledAsync<TContext>(string name, TContext context) => await IsFeatureEnabledAsyncHelper<object>(name, FeatureFlagDefaultState.Unkown, context);
+        public async Task<bool> IsFeatureEnabledAsync<TContext>(string name, TContext context) => await IsFeatureEnabledAsyncHelper<TContext>(name, FeatureFlagDefaultState.Unkown, context);
 
         public async Task<bool> IsFeatureEnabledAsync<TType>(TType instance) where TType : class
         {

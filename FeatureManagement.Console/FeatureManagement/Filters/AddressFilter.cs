@@ -3,13 +3,8 @@ using Microsoft.FeatureManagement;
 
 namespace FeatureManagement.Console.FeatureManagement.Filters
 {
-    public class CustomFilterVerboseLoggingFilter : IContextualFeatureFilter<Person>
-    {
-
-        public CustomFilterVerboseLoggingFilter()
-        {
-            
-        }
+    public class AddressFilter : IContextualFeatureFilter<Person>
+    {        
         public Task<bool> EvaluateAsync(FeatureFilterEvaluationContext featureFilterContext, Person appContext)
         {
             _ = featureFilterContext ?? throw new ArgumentNullException(nameof(featureFilterContext));

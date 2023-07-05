@@ -11,7 +11,7 @@ namespace FeatureManagement.Console.FeatureManagement
     {
         public static IServiceCollection AddFeatureConfiguration(this IServiceCollection collection, Action<IFeatureManagementBuilder> addFeatureFilters = null)
         {
-            var featureBuilder = collection.AddFeatureManagement().AddFeatureFilter<TimeWindowFilter>().AddFeatureFilter<TestContextualFilter>();
+            var featureBuilder = collection.AddFeatureManagement().AddFeatureFilter<TimeWindowFilter>();
 
             // add additional feature filters if any
             addFeatureFilters?.Invoke(featureBuilder);

@@ -13,30 +13,15 @@ namespace FeatureManagement.Console
     [FeatureDefinition("VerboseLogging")]
     public class Person
     {
-        private IFeatureFlagManagement featureManager;
-        private string address;
+        public string Name { get; set; }
 
-        public string Name => "John Doe";
+        public string Address { get; set; }
 
-        public string Address
+        public Person()
         {
-            get => "123 Street";
-            set => address = value;
+            Name = "John Doe";
+            Address = "123 Main St";
+
         }
-
-        public Person(IFeatureFlagManagement featureFlagManager) => featureManager = featureFlagManager;
-
-        public async Task<string> Display() => await featureManager.IsFeatureEnabledAsync(this) switch
-        {
-            true => string.Concat("Verbose Logging enabled: ", Name, " - ", Address),
-            _ => string.Concat("Verbose Logging disabled: ", Name)
-        };
-
-        public async Task<string> CustomDisplay() => await featureManager.IsFeatureEnabledAsync("CustomFilterVerboseLogging", this) switch
-        {
-            true => string.Concat("Verbose Logging enabled: ", Name, " - ", Address),
-            _ => string.Concat("Verbose Logging disabled: ", Name)
-        };
     }
-
 }

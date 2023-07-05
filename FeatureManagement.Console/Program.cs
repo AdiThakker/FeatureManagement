@@ -19,24 +19,20 @@ var app = Host.CreateDefaultBuilder()
     })
     .ConfigureServices(services =>
     {
-        services.AddFeatureConfiguration(_ => _.AddFeatureFilter<CustomFilterVerboseLoggingFilter>());
+        services.AddFeatureConfiguration(_ => _.AddFeatureFilter<AddressFilter>());
         services.AddTransient<IFeatureFlagManagement, FeatureFlagManagement>();
 
     })
     .Build();
 
 // Time Window logging feature
-var person = new Person(app.Services.GetService<IFeatureFlagManagement>()!);
-Console.WriteLine(await person.Display());
-
-var test = new MyFeatureManagement.Test();
-test.Number = 1;
-var testFeature = app.Services.GetService<IFeatureManager>()!.IsEnabledAsync("MyFeatureManagement.Test", test).Result;
+var person = new Person();
+Console.WriteLine(await person.Display(app.Services.GetService<IFeatureFlagManagement>()!));
 
 // Custom Filter logging feature
-//Console.WriteLine(await person.CustomDisplay());
+Console.WriteLine(await person.CustomDisplay(app.Services.GetService<IFeatureFlagManagement>()!));
 
-//person.Address = "Famous Street";
-//Console.WriteLine(await person.CustomDisplay());
+person.Address = "Famous Street";
+Console.WriteLine(await person.CustomDisplay(app.Services.GetService<IFeatureFlagManagement>()!));
 
 app.Run();
