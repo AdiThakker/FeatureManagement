@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using FeatureManagement.Console.FeatureManagement.Filters;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.FeatureManagement;
 using Microsoft.FeatureManagement.FeatureFilters;
@@ -10,7 +11,7 @@ namespace FeatureManagement.Console.FeatureManagement
     {
         public static IServiceCollection AddFeatureConfiguration(this IServiceCollection collection, Action<IFeatureManagementBuilder> addFeatureFilters = null)
         {
-            var featureBuilder = collection.AddFeatureManagement().AddFeatureFilter<TimeWindowFilter>();
+            var featureBuilder = collection.AddFeatureManagement().AddFeatureFilter<TimeWindowFilter>().AddFeatureFilter<TestContextualFilter>();
 
             // add additional feature filters if any
             addFeatureFilters?.Invoke(featureBuilder);
