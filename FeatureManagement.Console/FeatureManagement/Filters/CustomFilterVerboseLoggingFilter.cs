@@ -1,15 +1,15 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.FeatureManagement;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FeatureManagement.Console.FeatureManagement.Filters
 {
-    public class CustomFilterVerboseLogging : IContextualFeatureFilter<Person>
+    public class CustomFilterVerboseLoggingFilter : IContextualFeatureFilter<Person>
     {
+
+        public CustomFilterVerboseLoggingFilter()
+        {
+            
+        }
         public Task<bool> EvaluateAsync(FeatureFilterEvaluationContext featureFilterContext, Person appContext)
         {
             _ = featureFilterContext ?? throw new ArgumentNullException(nameof(featureFilterContext));
