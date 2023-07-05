@@ -17,7 +17,7 @@ var app = Host.CreateDefaultBuilder()
     })
     .ConfigureServices(services =>
     {
-        services.AddFeatureConfiguration(_ => _.AddFeatureFilter<CustomFilterVerboseLogging>());
+        services.AddFeatureConfiguration(_ => _.AddFeatureFilter<CustomFilterVerboseLoggingFilter>());
         services.AddTransient<IFeatureFlagManagement, FeatureFlagManagement>();
 
     })
