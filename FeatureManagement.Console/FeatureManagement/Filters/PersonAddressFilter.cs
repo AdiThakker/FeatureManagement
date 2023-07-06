@@ -3,7 +3,7 @@ using Microsoft.FeatureManagement;
 
 namespace FeatureManagement.Console.FeatureManagement.Filters
 {
-    public class AddressFilter : IContextualFeatureFilter<Person>
+    public class PersonAddressFilter : IContextualFeatureFilter<Person>
     {        
         public Task<bool> EvaluateAsync(FeatureFilterEvaluationContext featureFilterContext, Person appContext)
         {

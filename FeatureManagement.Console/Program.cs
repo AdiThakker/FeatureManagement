@@ -19,20 +19,23 @@ var app = Host.CreateDefaultBuilder()
     })
     .ConfigureServices(services =>
     {
-        services.AddFeatureConfiguration(_ => _.AddFeatureFilter<AddressFilter>());
+        services.AddFeatureConfiguration(_ => _.AddFeatureFilter<PersonAddressFilter>());
         services.AddTransient<IFeatureFlagManagement, FeatureFlagManagement>();
 
     })
     .Build();
 
+var featureManager = app.Services.GetService<IFeatureFlagManagement>()!;
+
 // Time Window logging feature
 var person = new Person();
-Console.WriteLine(await person.Display(app.Services.GetService<IFeatureFlagManagement>()!));
+Console.WriteLine(await person.Display(featureManager));
 
-// Custom Filter logging feature
-Console.WriteLine(await person.CustomDisplay(app.Services.GetService<IFeatureFlagManagement>()!));
+// Address logging feature (disabled)
+Console.WriteLine(await person.CustomDisplay(featureManager));
 
+// Address logging feature (enabled)
 person.Address = "Famous Street";
-Console.WriteLine(await person.CustomDisplay(app.Services.GetService<IFeatureFlagManagement>()!));
+Console.WriteLine(await person.CustomDisplay(featureManager));
 
 app.Run();

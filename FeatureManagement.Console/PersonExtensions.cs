@@ -19,10 +19,10 @@ namespace FeatureManagement.Console
             _ => string.Concat("Verbose Logging disabled: ", person.Name)
         };
 
-        public static async Task<string> CustomDisplay(this Person person, IFeatureFlagManagement featureManager) => await featureManager.IsFeatureEnabledAsync("AddressVerboseLogging", person) switch
+        public static async Task<string> CustomDisplay(this Person person, IFeatureFlagManagement featureManager) => await featureManager.IsFeatureEnabledAsync("AddressLogging", person) switch
         {
-            true => string.Concat("Verbose Logging enabled: ", person.Name, " - ", person.Address),
-            _ => string.Concat("Verbose Logging disabled: ", person.Name)
+            true => string.Concat("Address Logging enabled: ", person.Name, " - ", person.Address),
+            _ => string.Concat("Address Logging disabled: ", person.Name)
         };
     }
 }
